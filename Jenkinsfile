@@ -12,7 +12,8 @@ pipeline {
     }
 
     environment {
-        DOCKER_HOST = 'tcp://docker:2376'
+            TESTCONTAINERS_RYUK_DISABLED = 'true'
+            TESTCONTAINERS_HOST_OVERRIDE = 'host.docker.internal'
     }
 
     stages {
@@ -24,7 +25,13 @@ pipeline {
 
         stage ('Test') {
             steps {
-                sh 'mvn -B clean test -Dselenide.headless=true'
+                sh '''
+                    mvn -B clean test \
+                    -Dselenide.headless=true \
+                    -Dselenide.browserBinary=/usr/bin/chromium \
+                    -Dwebdriver.chrome.driver=/usr/bin/chromedriver \
+                    -Dchromeoptions.args="--no-sandbox,--disable-dev-shm-usage,--disable-gpu"
+                '''
             }
             post {
                 always {
