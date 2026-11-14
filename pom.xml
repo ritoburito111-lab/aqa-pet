@@ -84,7 +84,7 @@
                 <version>3.2.5</version>
                 <configuration>
                     <argLine>
-                        -javaagent:"${settings.localRepository}\org\aspectj\aspectjweaver\1.9.25\aspectjweaver-1.9.25.jar"
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.25/aspectjweaver-1.9.25.jar"
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
